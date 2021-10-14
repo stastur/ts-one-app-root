@@ -1,0 +1,4 @@
+// implicitly used by one-app-bundler, do not remove
+{
+  "presets": ["amex"]
+}

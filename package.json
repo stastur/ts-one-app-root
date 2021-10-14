@@ -1,0 +1,132 @@
+{
+  "name": "ts-one-app-root",
+  "version": "1.0.0",
+  "description": "",
+  "contributors": [],
+  "scripts": {
+    "start": "one-app-runner",
+    "prebuild": "npm run clean",
+    "build": "bundle-module",
+    "watch:build": "npm run build -- --watch",
+    "clean": "rimraf build",
+    "prepare": "npm run build",
+    "test:lint": "eslint --ignore-path .gitignore --ext ts,tsx . --fix",
+    "test:unit": "jest",
+    "test": "npm run test:lint && npm run test:unit"
+  },
+  "one-amex": {
+    "app": {
+      "compatibility": "^5.0.0"
+    },
+    "runner": {
+      "dockerImage": "oneamex/one-app-dev:latest",
+      "modules": [
+        "."
+      ],
+      "rootModuleName": "ts-one-app-root"
+    },
+    "bundler": {
+      "providedExternals": [
+        "react-intl"
+      ],
+      "webpackConfigPath": "./webpack.config.js"
+    }
+  },
+  "dependencies": {
+    "@americanexpress/one-app-router": "^1.1.0",
+    "holocron": "^1.1.2",
+    "react": "^16.14.0",
+    "content-security-policy-builder": "^2.1.0",
+    "@americanexpress/one-app-ducks": "^4.2.2",
+    "immutable": "^4.0.0-rc.12",
+    "react-intl": "^5.10.6",
+    "react-redux": "^7.2.2",
+    "redux": "^4.0.5"
+  },
+  "devDependencies": {
+    "@americanexpress/one-app-bundler": "^6.10.0",
+    "@americanexpress/one-app-runner": "^6.10.0",
+    "@testing-library/jest-dom": "^5.14.1",
+    "@testing-library/react": "^12.1.2",
+    "@types/jest": "^27.0.2",
+    "@types/react": "^16.14.17",
+    "@types/webpack": "^4.41.31",
+    "@typescript-eslint/eslint-plugin": "^4.33.0",
+    "@typescript-eslint/parser": "^4.33.0",
+    "babel-eslint": "^10.1.0",
+    "babel-preset-amex": "^3.5.0",
+    "eslint": "^7.32.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-config-react-app": "^6.0.0",
+    "eslint-import-resolver-typescript": "^2.5.0",
+    "eslint-plugin-flowtype": "^5.10.0",
+    "eslint-plugin-import": "^2.25.2",
+    "eslint-plugin-jest": "^24.7.0",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-react": "^7.26.1",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "eslint-plugin-testing-library": "^4.12.4",
+    "jest": "^27.2.5",
+    "prettier": "^2.4.1",
+    "ts-jest": "^27.0.6",
+    "ts-loader": "^8.3.0",
+    "typescript": "^4.4.4"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest",
+      "plugin:prettier/recommended",
+      "plugin:@typescript-eslint/recommended",
+      "plugin:import/recommended",
+      "plugin:import/typescript"
+    ],
+    "plugins": [
+      "prettier"
+    ],
+    "settings": {
+      "import/resolver": {
+        "typescript": {}
+      }
+    },
+    "rules": {
+      "prettier/prettier": "warn",
+      "import/no-named-as-default-member": "off",
+      "import/no-default-export": "off"
+    }
+  },
+  "prettier": {
+    "printWidth": 110,
+    "tabWidth": 2,
+    "useTabs": false,
+    "semi": false,
+    "singleQuote": true,
+    "trailingComma": "es5",
+    "bracketSpacing": true,
+    "jsxBracketSameLine": false,
+    "arrowParens": "avoid"
+  },
+  "jest": {
+    "preset": "ts-jest",
+    "testEnvironment": "jsdom",
+    "collectCoverageFrom": [
+      "src/**/*.{js,jsx,ts,tsx}",
+      "!<rootDir>/node_modules/"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "branches": 90,
+        "functions": 90,
+        "lines": 90,
+        "statements": 90
+      }
+    },
+    "coverageReporters": [
+      "text"
+    ],
+    "setupFilesAfterEnv": [
+      "<rootDir>/src/setupTests.ts"
+    ]
+  }
+}
